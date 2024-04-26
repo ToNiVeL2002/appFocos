@@ -7,7 +7,11 @@ import 'package:http/http.dart' as http;
 class ValoresService extends ChangeNotifier {
   final String _baseUrl = "esp32-fea08-default-rtdb.firebaseio.com";
   final List<LedResponse> valores = [];
+
+  // late LedResponse selectedLed;
+
   bool isLoading = true;
+  bool isSaving = true;
 
   ValoresService() {
     loadValres();
@@ -38,6 +42,41 @@ class ValoresService extends ChangeNotifier {
 
     return valores;
   }
+
+  Future saveNuevoValor( LedResponse ledResponse ) async {
+    isSaving = true;
+    notifyListeners();
+
+    if ( ledResponse.id != null ) {
+      // Actualizar
+      await updateValor(ledResponse);
+    }
+
+    isSaving = false;
+    notifyListeners();
+  }
+
+  Future<String> updateValor( LedResponse ledResponse ) async {
+    
+    final url = Uri.https(_baseUrl, 'valores/${ ledResponse.id }.json');
+
+    final body = jsonEncode(LedResponse(ldr: ledResponse.ldr, state: ledResponse.state, id: ledResponse.id).toJson());
+
+    final resp = await http.put( url, body: body );
+    final decodeData = resp.body;
+
+    print(decodeData);
+
+
+    // Actualizar
+    final index = valores.indexWhere( (element) => element.id == ledResponse.id ) ;
+    valores[index] = ledResponse;
+
+    // ACTUALIZAR EL LISTADO
+    return ledResponse.id!;
+  }
+
+
 
 }
 

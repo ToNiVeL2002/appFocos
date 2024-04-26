@@ -44,6 +44,7 @@ class LedResponse {
     LedResponse({
         required this.ldr,
         required this.state,
+        this.id
     });
 
     factory LedResponse.fromJson(Map<String, dynamic> json) => LedResponse(
@@ -55,4 +56,10 @@ class LedResponse {
         "ldr": ldr,
         "state": state,
     };
+
+    LedResponse copy() => LedResponse(
+      ldr: ldr, 
+      state: state,
+      id: id
+    );
 }

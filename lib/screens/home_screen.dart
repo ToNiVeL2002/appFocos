@@ -21,7 +21,10 @@ class HomeScreen extends StatelessWidget {
         itemCount: valoresServices.valores.length,
         itemBuilder: (context, index) {
           
-          return Cards(ledResponse: valoresServices.valores[index]);
+          return Cards(
+            ledResponse: valoresServices.valores[index], 
+            valoresService: valoresServices,
+          );
         },
       )
     );
