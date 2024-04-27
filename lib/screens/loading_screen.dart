@@ -9,9 +9,16 @@ class LoadingScreen extends StatelessWidget {
       
 
       body: Center(
-        child: CircularProgressIndicator(
-          color: Colors.red,
-        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(
+              color: Colors.blue,
+            ),
+
+            Image(image: AssetImage('assets/veichanBombastic.jpg'))
+          ],
+        )
       ),
     );
   }
