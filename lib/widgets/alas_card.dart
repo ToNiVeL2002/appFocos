@@ -2,27 +2,26 @@ import 'package:encendedor/provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PisosCard extends StatelessWidget {
+class AlasCard extends StatelessWidget {
 
   final String imagen;
   final String nombre;
+  final String numeros;
 
-  const PisosCard({super.key, 
+  const AlasCard({super.key, 
   required this.imagen, 
-  required this.nombre
+  required this.nombre, 
+  required this.numeros
 });
 
   @override
   Widget build(BuildContext context) {
     
     final screen = MediaQuery.of(context).size;
-    final uiPisoProvider = Provider.of<UIPisoProvider>(context);
 
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, 'piso');
-        uiPisoProvider.numeroPisoo = nombre;
-        uiPisoProvider.imagenn = imagen;
+        // Navigator.pushNamed(context, 'piso');
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 15),
@@ -46,14 +45,22 @@ class PisosCard extends StatelessWidget {
             Image.asset(
               imagen,
               fit: BoxFit.fill,
-              width: 90,
-              height: 90,
+              width: 80,
+              height: 80,
             ),
       
             Text(
               nombre,
               style: TextStyle(
                 fontSize: 20
+              ),
+            ),
+
+            Text(
+              numeros,
+              style: TextStyle(
+                fontSize: 15,
+                color: Color(0xffB0A8A8)
               ),
             )
           ],
