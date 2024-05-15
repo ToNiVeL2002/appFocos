@@ -1,7 +1,6 @@
 import 'package:encendedor/models/models.dart';
 import 'package:encendedor/services/services.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class Cards extends StatelessWidget {
 
@@ -62,19 +61,22 @@ class _CardsBody extends StatelessWidget {
             ),
 
             Positioned(
-              child: Container(
-                width: 100,
-                height: 80,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(15), bottomRight: Radius.circular(30)),
-                  color: Colors.yellow
-                ),
-
-                child: Center(
-                  child: Text(
-                    'LDR: ${ledResponse.ldr}',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold
+              child: GestureDetector(
+                onTap: () => valoresService.recargarValores(),
+                child: Container(
+                  width: 100,
+                  height: 80,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(15), bottomRight: Radius.circular(30)),
+                    color: Colors.yellow
+                  ),
+                
+                  child: Center(
+                    child: Text(
+                      'LDR: ${ledResponse.ldr}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold
+                      ),
                     ),
                   ),
                 ),
@@ -113,7 +115,7 @@ class _IconoBoton extends StatelessWidget {
           
           valoresService.saveNuevoValor(
             LedResponse(
-              ldr: 50, 
+              ldr: ledResponse.ldr,
               state: value,
               id: ledResponse.id
             )
